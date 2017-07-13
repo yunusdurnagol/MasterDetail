@@ -7,7 +7,7 @@ namespace MasterDetail.Models
 {
     public class WorkOrder
     {
-        public int WorkerId { get; set; }
+        public int WorkOrderId { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         public DateTime OrderDateTime { get; set; }

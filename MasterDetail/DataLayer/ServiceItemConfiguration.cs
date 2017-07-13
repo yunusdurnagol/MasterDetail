@@ -26,7 +26,7 @@ namespace MasterDetail.DataLayer
                 .IsRequired()
                 .HasColumnAnnotation("Index",
                     new IndexAnnotation(
-                        new IndexAttribute("AK_ServiceItem_ServiceItemCode") {IsUnique = true}));
+                        new IndexAttribute("AK_ServiceItem_ServiceItemName") {IsUnique = true}));
 
             Property(si => si.Rate)
                 .HasPrecision(18, 2);
