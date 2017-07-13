@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MasterDetail.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,11 @@ namespace MasterDetail.Controllers
     {
         public ActionResult Index()
         {
+            ApplicationDbContext context = new ApplicationDbContext();
+            context.WorkOrders.Add(
+                new WorkOrder() { Description = "Description", CustomerId =1, WorkOrderStatus = WorkOrderStatus.Approved }
+                );
+            context.SaveChanges();
             return View();
         }
 
