@@ -1,3 +1,6 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace MasterDetail.Migrations
 {
     using System;
@@ -5,28 +8,58 @@ namespace MasterDetail.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Models;
+    using MasterDetail.DataLayer;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MasterDetail.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(MasterDetail.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            var userManager =
+            new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            userManager.UserValidator=new UserValidator<ApplicationUser>(userManager)
+            {
+                AllowOnlyAlphanumericUserNames = false
+            };
+
+            var roleManager =
+                new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(new ApplicationDbContext()));
+
+
+            string name = "dumbcoder@gmail.com";
+            string password = "dumPas123.";
+            string firstName = "Dumb";
+            string roleName = "Admin";
+
+            var role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role=new ApplicationRole(roleName);
+                var roleResult = roleManager.Create(role);
+            }
+
+            var user = userManager.FindByName(name);
+            if (user == null)
+            {
+                user=new ApplicationUser(){UserName = name,Email=name,FirstName = firstName};
+                var result = userManager.Create(user, password);
+                result=userManager.SetLockoutEnabled(user.Id,false)
+                    ;
+            }
+
+            var rolesForUser = userManager.GetRoles(user.Id);
+            if (!rolesForUser.Contains(role.Name))
+            {
+                var result = userManager.AddToRole(user.Id,role.Name);
+            }
+
+            ///////////////////////////
             string accountNumber = "ABC123";
             context.Customers.AddOrUpdate(c=>c.AccountNumber,
              new Customer()

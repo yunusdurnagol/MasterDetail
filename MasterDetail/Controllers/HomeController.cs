@@ -11,11 +11,11 @@ namespace MasterDetail.Controllers
     {
         public ActionResult Index()
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            context.WorkOrders.Add(
-                new WorkOrder() { Description = "Description", CustomerId =1, WorkOrderStatus = WorkOrderStatus.Approved }
-                );
-            context.SaveChanges();
+            //ApplicationDbContext context = new ApplicationDbContext();
+            //context.WorkOrders.Add(
+            //    new WorkOrder() { Description = "Description", CustomerId =1, WorkOrderStatus = WorkOrderStatus.Approved }
+            //    );
+            //context.SaveChanges();
             return View();
         }
 

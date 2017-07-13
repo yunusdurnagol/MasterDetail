@@ -19,7 +19,8 @@ namespace MasterDetail.DataLayer
                 .HasColumnAnnotation("Index",
                     new IndexAnnotation(new IndexAttribute("AK_Customer_AccountNumber") { IsUnique = true }));
 
-            Property(c => c.CompanyName).HasMaxLength(30).IsRequired();
+            Property(c => c.CompanyName).HasMaxLength(30).IsRequired()
+                .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("AK_Customer_CompanyName") { IsUnique = true }));
             Property(c => c.Adress).HasMaxLength(30).IsRequired();
             Property(c => c.City).HasMaxLength(15).IsRequired();
             Property(c => c.State).HasMaxLength(2).IsRequired();
