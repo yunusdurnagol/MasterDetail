@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201707132136244_CompanyNameIndex.Designer.cs">
       <DependentUpon>201707132136244_CompanyNameIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707162140377_UserFirstNameRequired.cs" />
+    <Compile Include="Migrations\201707162140377_UserFirstNameRequired.Designer.cs">
+      <DependentUpon>201707162140377_UserFirstNameRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -312,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707132136244_CompanyNameIndex.resx">
       <DependentUpon>201707132136244_CompanyNameIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707162140377_UserFirstNameRequired.resx">
+      <DependentUpon>201707162140377_UserFirstNameRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

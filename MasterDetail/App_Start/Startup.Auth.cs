@@ -61,8 +61,8 @@ namespace MasterDetail
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
-            //    ClientId = "",
-            //    ClientSecret = ""
+            //    ClientId = "1029173545027-gce786k3j0a23dvjijt4mrg3do8r5sff.apps.googleusercontent.com",
+            //    ClientSecret = "1Q6_MQdXJDCrBTmdug2iTSna"
             //});
         }
     }

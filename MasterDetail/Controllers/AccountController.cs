@@ -86,7 +86,7 @@ namespace MasterDetail.Controllers
             
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -170,11 +170,8 @@ namespace MasterDetail.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    return await GenerateemailConfirmation(user);
 
-                    return View("CheckYourEmail");
                 }
                 AddErrors(result);
             }
@@ -182,8 +179,26 @@ namespace MasterDetail.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        [AllowAnonymous]
+        public async Task<ActionResult> GenerateemailConfirmation(ApplicationUser user)
+        {
+        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-        //
+        return View("CheckYourEmail");
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<ActionResult> RegGenerateEmailConfirmation(string email)
+        {
+            var user = await UserManager.FindByNameAsync(email);
+            if (user != null)
+            {
+                return RedirectToAction("GenerateEmailConfirmation", user);
+            }
+            return View("Login");
+        }
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
