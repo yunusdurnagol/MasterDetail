@@ -43,6 +43,7 @@ namespace MasterDetail.DataLayer
         {
             return new ApplicationDbContext();
         }
+
     }
 
 }

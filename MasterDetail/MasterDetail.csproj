@@ -189,6 +189,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationRolesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataLayer\ApplicationDbContext.cs" />
@@ -215,6 +216,18 @@
     <Compile Include="Migrations\201707162140377_UserFirstNameRequired.Designer.cs">
       <DependentUpon>201707162140377_UserFirstNameRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707251902467_ApplicationUserAttributes.cs" />
+    <Compile Include="Migrations\201707251902467_ApplicationUserAttributes.Designer.cs">
+      <DependentUpon>201707251902467_ApplicationUserAttributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707252013255_AddCurrentWorkerForeignkey.cs" />
+    <Compile Include="Migrations\201707252013255_AddCurrentWorkerForeignkey.Designer.cs">
+      <DependentUpon>201707252013255_AddCurrentWorkerForeignkey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707252032234_cascading.cs" />
+    <Compile Include="Migrations\201707252032234_cascading.Designer.cs">
+      <DependentUpon>201707252032234_cascading.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -223,6 +236,7 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\InventoryItem.cs" />
     <Compile Include="Models\Labor.cs" />
+    <Compile Include="ViewModels\ApplicationRoleViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Models\ServiceItem.cs" />
@@ -291,6 +305,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\CheckYourEmail.cshtml" />
     <Content Include="Views\Account\UnConfirmedAccount.cshtml" />
+    <Content Include="Views\Manage\ChangeProfile.cshtml" />
+    <Content Include="Views\ApplicationRoles\Create.cshtml" />
+    <Content Include="Views\ApplicationRoles\Delete.cshtml" />
+    <Content Include="Views\ApplicationRoles\Details.cshtml" />
+    <Content Include="Views\ApplicationRoles\Edit.cshtml" />
+    <Content Include="Views\ApplicationRoles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -319,6 +339,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707162140377_UserFirstNameRequired.resx">
       <DependentUpon>201707162140377_UserFirstNameRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707251902467_ApplicationUserAttributes.resx">
+      <DependentUpon>201707251902467_ApplicationUserAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707252013255_AddCurrentWorkerForeignkey.resx">
+      <DependentUpon>201707252013255_AddCurrentWorkerForeignkey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707252032234_cascading.resx">
+      <DependentUpon>201707252032234_cascading.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -16,6 +16,8 @@ namespace MasterDetail.DataLayer
             Property(wo => wo.Description).HasMaxLength(256).IsOptional();
             Property(wo => wo.CertificationRequirements).HasMaxLength(120).IsOptional();
             Property(wo => wo.Total).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
+            HasRequired(wo => wo.CurrentWorker).WithMany(au=>au.WorkOrders).WillCascadeOnDelete(false);
+            HasRequired(wo=>wo.Customer).WithMany(c=>c.WorkOrders).WillCascadeOnDelete(false);
         }
     }
 }

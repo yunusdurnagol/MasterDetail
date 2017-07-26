@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MasterDetail.DataLayer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace MasterDetail.Models
 {
@@ -20,6 +21,12 @@ namespace MasterDetail.Models
 
 
         public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public  string Address { get; set; }
+        public  string City { get; set; }
+        public  string State { get; set; }
+        public string ZipCode { get; set; }
+        public List<WorkOrder> WorkOrders { get; set; }
     }
  
 }

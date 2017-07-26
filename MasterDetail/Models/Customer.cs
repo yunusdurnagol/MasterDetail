@@ -15,5 +15,7 @@ namespace MasterDetail.Models
         public string State { get; set; }
         public string Zipcode { get; set; }
         public string PhoneNumber { get; set; }
+
+        public List<WorkOrder> WorkOrders { get; set; }
     }
 }

@@ -49,7 +49,46 @@ namespace MasterDetail.Controllers
                 _userManager = value;
             }
         }
+      
+        public async Task<ActionResult> ChangeProfile()
+        {
 
+            ApplicationUser applicationUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (applicationUser!=null)
+            {
+                return View(applicationUser);
+            }
+            return RedirectToAction("Index", new {Message = ManageMessageId.Error});
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeProfile(ApplicationUser applicationUser)
+        {
+            ManageMessageId manageMessageId;
+
+            ApplicationUser retrivedApplicationUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            retrivedApplicationUser.FirstName = applicationUser.FirstName;
+            retrivedApplicationUser.LastName = applicationUser.LastName;
+            retrivedApplicationUser.Address = applicationUser.Address;
+            retrivedApplicationUser.City = applicationUser.City;
+            retrivedApplicationUser.State = applicationUser.State;
+            retrivedApplicationUser.ZipCode = applicationUser.ZipCode;
+
+            var result = await UserManager.UpdateAsync(retrivedApplicationUser);
+            if (result.Succeeded)
+            {
+                manageMessageId = ManageMessageId.ChangeProfileSuccess;
+
+            }
+            else
+            {
+                manageMessageId = ManageMessageId.Error;
+            }
+            return RedirectToAction("Index", new { Message = manageMessageId });
+
+        }
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -61,6 +100,7 @@ namespace MasterDetail.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message==ManageMessageId.ChangeProfileSuccess ? "Your profile has been changed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -381,6 +421,7 @@ namespace MasterDetail.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            ChangeProfileSuccess,
             Error
         }
 

@@ -79,7 +79,7 @@ namespace MasterDetail.Migrations
             string description = "Just another work order";
 
             context.WorkOrders.AddOrUpdate(wo => wo.Description,
-                new WorkOrder() { Description = description, CustomerId = customer.CustomerId, WorkOrderStatus = WorkOrderStatus.Approved}
+                new WorkOrder() { Description = description, CustomerId = customer.CustomerId, WorkOrderStatus = WorkOrderStatus.Approved,CurrentWorkerId = user.Id}
                 );
             context.SaveChanges();
 

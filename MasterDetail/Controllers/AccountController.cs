@@ -162,7 +162,17 @@ namespace MasterDetail.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,FirstName=model.FirstName};
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName =model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    City = model.City,
+                    State = model.State,
+                    ZipCode = model.ZipCode
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -188,6 +198,8 @@ namespace MasterDetail.Controllers
 
         return View("CheckYourEmail");
         }
+
+
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> RegGenerateEmailConfirmation(string email)

@@ -28,6 +28,8 @@ namespace MasterDetail.DataLayer
             Property(c => c.UnitPrice)
                 .HasPrecision(18, 2);
 
+            HasRequired(ii=>ii.Category).WithMany(cat=>cat.InventoryItems).WillCascadeOnDelete(false);
+
         }
     }
 }
